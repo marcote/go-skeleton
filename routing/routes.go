@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	//Router exposes the endpoint of the application.
 	Router *gin.Engine
 )
 
@@ -13,4 +14,9 @@ var (
 func Register() {
 	Router.GET("/ping", controller.Ping)
 	Router.GET("/characters/:id", controller.RetrieveCharacters)
+}
+
+// Configure the routing behavior
+func Configure() {
+	Router = gin.New()
 }

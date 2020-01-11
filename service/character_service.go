@@ -46,10 +46,11 @@ func (sw CharacterService) GetCharacterByID(characterID int64) (response.Charact
 	starship, err := getSwapiSource().GetStarshipByID(starshipID)
 
 	character := response.Character{
-		Name:     person.Name,
-		Height:   person.Height,
-		Starship: starship.Name,
-		Spicie:   spicie.Name,
+		Name:      person.Name,
+		Height:    person.Height,
+		Homeworld: person.Homeworld,
+		Starship:  starship.Name,
+		Spicie:    spicie.Name,
 	}
 
 	return character, nil
