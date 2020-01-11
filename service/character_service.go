@@ -2,6 +2,8 @@ package service
 
 import (
 	"errors"
+	"path"
+	"strconv"
 
 	"github.com/marcote/go-skeleton/datasource"
 	response "github.com/marcote/go-skeleton/response"
@@ -33,13 +35,15 @@ func (sw CharacterService) GetCharacterByID(characterID int64) (response.Charact
 		return response.Character{}, err
 	}
 
-	spicie, err := getSwapiSource().GetSpicieByID(person.SpeciesURLs[0])
+	specieID, err := strconv.ParseInt(path.Base(string(person.SpeciesURLs[0])), 10, 32)
+	spicie, err := getSwapiSource().GetSpicieByID(specieID)
 
 	if err != nil {
 		return response.Character{}, err
 	}
 
-	starship, err := getSwapiSource().GetStarshipByID(spicie.StarshipURLs[0])
+	starshipID, err := strconv.ParseInt(path.Base(string(person.StarshipURLs[0])), 10, 32)
+	starship, err := getSwapiSource().GetStarshipByID(starshipID)
 
 	character := response.Character{
 		Name:     person.Name,

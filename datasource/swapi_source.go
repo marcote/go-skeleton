@@ -12,13 +12,13 @@ import (
 type ISWAPISource interface {
 
 	//GET People
-	GetPersonByID(personID int32) (r.Person, error)
+	GetPersonByID(personID int64) (r.Person, error)
 
 	//GET Spicie
-	GetSpicieByID(spicieID int32) (r.Species, error)
+	GetSpicieByID(spicieID int64) (r.Species, error)
 
 	//GET Starships
-	GetStarshipsByID(starshipID int32) (r.Starship, error)
+	GetStarshipByID(starshipID int64) (r.Starship, error)
 }
 
 //HTTPClient is hour Client to retrieve information from SW API
@@ -28,7 +28,7 @@ var HTTPClient = util.NewClient()
 type SWAPISource struct{}
 
 //GetPersonByID using the SW API
-func (ss SWAPISource) GetPersonByID(personID int32) (r.Person, error) {
+func (ss SWAPISource) GetPersonByID(personID int64) (r.Person, error) {
 
 	if personID == 0 {
 		return r.Person{}, errors.New("personID ID cannot be 0")
@@ -48,7 +48,7 @@ func (ss SWAPISource) GetPersonByID(personID int32) (r.Person, error) {
 }
 
 //GetSpicieByID using the SW API
-func (ss SWAPISource) GetSpicieByID(spicieID int32) (r.Species, error) {
+func (ss SWAPISource) GetSpicieByID(spicieID int64) (r.Species, error) {
 
 	if spicieID == 0 {
 		return r.Species{}, errors.New("spicieID ID cannot be 0")
@@ -67,8 +67,8 @@ func (ss SWAPISource) GetSpicieByID(spicieID int32) (r.Species, error) {
 	return spicie, nil
 }
 
-//GetStarshipsByID using the SW API
-func (ss SWAPISource) GetStarshipsByID(starshipID int32) (r.Starship, error) {
+//GetStarshipByID using the SW API
+func (ss SWAPISource) GetStarshipByID(starshipID int64) (r.Starship, error) {
 
 	if starshipID == 0 {
 		return r.Starship{}, errors.New("spicieID ID cannot be 0")
