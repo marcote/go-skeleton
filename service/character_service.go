@@ -63,8 +63,8 @@ func (sw CharacterService) GetCharacterByID(characterID int64) (response.Charact
 		character.Starship = "NONE"
 	}
 
-	if homeworldID, err := strconv.ParseInt(path.Base(string(person.Homeworld)), 10, 32); err != nil {
-		homeworld, err := getSwapiSource().GetStarshipByID(homeworldID)
+	if homeworldID, err := strconv.ParseInt(path.Base(string(person.Homeworld)), 10, 32); err == nil {
+		homeworld, err := getSwapiSource().GetHomeWorldByID(homeworldID)
 
 		if err == nil {
 			character.Homeworld = homeworld.Name
