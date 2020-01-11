@@ -19,6 +19,9 @@ type ISWAPISource interface {
 
 	//GET Starships
 	GetStarshipByID(starshipID int64) (r.Starship, error)
+
+	//GET Homeworld
+	GetHomeWorldByID(homeworldID int64) (r.Planet, error)
 }
 
 //HTTPClient is hour Client to retrieve information from SW API
@@ -71,7 +74,7 @@ func (ss SWAPISource) GetSpicieByID(spicieID int64) (r.Species, error) {
 func (ss SWAPISource) GetStarshipByID(starshipID int64) (r.Starship, error) {
 
 	if starshipID == 0 {
-		return r.Starship{}, errors.New("spicieID ID cannot be 0")
+		return r.Starship{}, errors.New("starshipID ID cannot be 0")
 	}
 
 	req, err := HTTPClient.NewRequest(fmt.Sprintf("starships/%d", starshipID))
@@ -85,4 +88,24 @@ func (ss SWAPISource) GetStarshipByID(starshipID int64) (r.Starship, error) {
 	}
 
 	return starship, nil
+}
+
+//GetHomeWorldByID using the SW API
+func (ss SWAPISource) GetHomeWorldByID(homeworldID int64) (r.Planet, error) {
+
+	if homeworldID == 0 {
+		return r.Planet{}, errors.New("homeworldID ID cannot be 0")
+	}
+
+	req, err := HTTPClient.NewRequest(fmt.Sprintf("planets/%d", homeworldID))
+	if err != nil {
+		return r.Planet{}, err
+	}
+
+	var homeworld r.Planet
+	if _, err = HTTPClient.Do(req, &homeworld); err != nil {
+		return r.Planet{}, err
+	}
+
+	return homeworld, nil
 }

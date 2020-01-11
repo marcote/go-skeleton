@@ -35,22 +35,44 @@ func (sw CharacterService) GetCharacterByID(characterID int64) (response.Charact
 		return response.Character{}, err
 	}
 
-	specieID, err := strconv.ParseInt(path.Base(string(person.SpeciesURLs[0])), 10, 32)
-	spicie, err := getSwapiSource().GetSpicieByID(specieID)
-
-	if err != nil {
-		return response.Character{}, err
+	character := response.Character{
+		Name:   person.Name,
+		Height: person.Height,
 	}
 
-	starshipID, err := strconv.ParseInt(path.Base(string(person.StarshipURLs[0])), 10, 32)
-	starship, err := getSwapiSource().GetStarshipByID(starshipID)
+	if len(person.SpeciesURLs) > 0 {
+		specieID, err := strconv.ParseInt(path.Base(string(person.SpeciesURLs[0])), 10, 32)
+		spicie, err := getSwapiSource().GetSpicieByID(specieID)
 
-	character := response.Character{
-		Name:      person.Name,
-		Height:    person.Height,
-		Homeworld: person.Homeworld,
-		Starship:  starship.Name,
-		Spicie:    spicie.Name,
+		if err == nil {
+			character.Spicie = spicie.Name
+		}
+	} else {
+		character.Spicie = "NONE"
+	}
+
+	if len(person.StarshipURLs) > 0 {
+		starshipID, err := strconv.ParseInt(path.Base(string(person.StarshipURLs[0])), 10, 32)
+		starship, err := getSwapiSource().GetStarshipByID(starshipID)
+
+		if err == nil {
+			character.Starship = starship.Name
+		}
+
+	} else {
+		character.Starship = "NONE"
+	}
+
+	if homeworldID, err := strconv.ParseInt(path.Base(string(person.Homeworld)), 10, 32); err != nil {
+		homeworld, err := getSwapiSource().GetStarshipByID(homeworldID)
+
+		if err == nil {
+			character.Homeworld = homeworld.Name
+		} else {
+			character.Homeworld = "NONE"
+		}
+	} else {
+		character.Homeworld = "ERROR"
 	}
 
 	return character, nil
