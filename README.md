@@ -11,7 +11,7 @@ Simply clone this repository. This project use Go Modules, so, `go mod download`
 
 ## Project Structure
 
-`
+```
 .
 ├── controller
 │   └── character_controller.go
@@ -31,7 +31,7 @@ Simply clone this repository. This project use Go Modules, so, `go mod download`
 │   └── character_service.go
 └── util
     └── client.go
-`
+```
 
 ## Built With
 
