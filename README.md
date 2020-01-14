@@ -2,7 +2,7 @@
 
 I created this simple project to illustrate how an API can be structured, specially when the API responsability includes the coordination and calls to other APIs.
 I'm not including (at least now) any architectural o reliability best practices, such as circuit-brakers.
-The intended audience is new programmers or programmers new to the Go language, not how to design production ready APIs.
+The intended audience is new programmers or programmers new to the Go language on how to design production ready APIs.
 Yes, a hello world with steroids.
 
 ## Getting Started
