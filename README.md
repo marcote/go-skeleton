@@ -9,6 +9,28 @@ Yes, a hello world with steroids.
 
 Simply clone this repository. This project use Go Modules, so, `go mod download` will be required to download modules used in this project.
 
+## Project Structure
+.
+├── controller
+│   └── character_controller.go
+├── datasource
+│   └── swapi_source.go
+├── go.mod
+├── go-skeleton
+├── go.sum
+├── main.go
+├── README.md
+├── request
+├── response
+│   └── response.go
+├── routing
+│   └── routes.go
+├── service
+│   └── character_service.go
+└── util
+    └── client.go
+
+
 ## Built With
 
 - [Go](https://golang.org/) - The programming language used
