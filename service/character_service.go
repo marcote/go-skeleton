@@ -75,7 +75,7 @@ func (sw CharacterService) GetCharacterByID(characterID int64) (response.Charact
 		character.Homeworld = "ERROR"
 	}
 
-	return character, nil
+	return character, err
 }
 
 func getSwapiSource() datasource.ISWAPISource {

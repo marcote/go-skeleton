@@ -17,7 +17,7 @@ func Ping(c *gin.Context) {
 	c.String(http.StatusOK, "pong")
 }
 
-//RetrieveCharacters with specie and planets
+//RetrieveCharacters with specie and planets and howeworld
 // GET /characters/:id
 // example: GET /characters/1
 func RetrieveCharacters(c *gin.Context) {
@@ -26,7 +26,7 @@ func RetrieveCharacters(c *gin.Context) {
 	characterID, errParsing := strconv.ParseInt(c.Param("id"), 10, 64)
 
 	if errParsing != nil {
-		log.Println("The request is badly formated")
+		log.Println("The request is badly formatted")
 		c.JSON(http.StatusBadRequest, errParsing)
 		return
 	}
